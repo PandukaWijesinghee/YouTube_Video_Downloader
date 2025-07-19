@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YouTube to MP4 Converter</title>
+  <title>YouTube to MP4 Downloader</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="container">
     <div class="header-icon">
-      <i class="fas fa-play-circle"></i>
+      
     </div>
-    <h1>🎬 YouTube Converter</h1>
+    <h1>🎬 YouTube Downloader</h1>
     
     <div id="urlInputSection" class="input-group">
       <i class="fas fa-link input-icon"></i>
@@ -20,6 +20,16 @@
       <div class="error hidden" id="errorMsg">
         <i class="fas fa-exclamation-triangle error-icon"></i>
         <span></span>
+      </div>
+      <div class="how-to-section">
+        <h3 class="how-to-title"><i class="fas fa-info-circle"></i> How to Use the YouTube Downloader</h3>
+        <ol class="how-to-list">
+          <li>Copy the URL of the YouTube video you want to download.</li>
+          <li>Paste the URL into the input field at the top of this page.</li>
+          <li>Press the <b>Download Now</b> button to see available options.</li>
+          <li>Choose your preferred video or audio format and quality.</li>
+          <li>Click the download link to save the file to your device.</li>
+        </ol>
       </div>
     </div>
 
@@ -109,6 +119,14 @@
       </div>
     </div>
   </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <span>&copy; 2025 YouTube to MP4 Downloader</span>
+      <span class="footer-links">
+       </span>
+    </div>
+  </footer>
 
   <script>
     const form = document.getElementById('downloadForm');
