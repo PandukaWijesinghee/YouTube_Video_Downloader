@@ -6,22 +6,62 @@
   <title>YouTube to MP4 Downloader</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="logo2.png">
 </head>
 <body>
-  <div class="container">
-    <div class="header-icon">
-      
+  <header class="header-bar">
+    <div class="header-content">
+      <img src="logo2.png" alt="YouTube Downloader Logo" class="header-logo" />
+      <span class="header-title">YouTube Downloader</span>
+
     </div>
-    <h1>🎬 YouTube Downloader</h1>
-    
-    <div id="urlInputSection" class="input-group">
-      <i class="fas fa-link input-icon"></i>
-      <input type="text" id="youtubeUrl" placeholder="Paste YouTube URL here..." required />
+    <div class="header-safe">
+      <i class="fas fa-check-circle" style="color: #f8f8f8; margin-right: 6px;"></i>Fast, reliable, and secure
+      <button id="darkModeToggle" class="dark-mode-toggle" title="Toggle dark mode"><i class="fas fa-moon"></i></button>
+    </div>
+  </header>
+  <main class="main-section">
+    <h1 class="main-headline">Download YouTube Videos <span class="highlight">Instantly</span></h1>
+    <div class="main-subtitle">Convert and download YouTube videos in high quality. Support for MP4, MP3, and multiple resolutions.</div>
+    <div class="input-card">
+      <div class="input-wrapper">
+        <i type="text" class="fas fa-link input-icon"></i>
+        <input type="text" id="youtubeUrl" class="main-input" placeholder="Paste YouTube URL here..." />
+      </div>
+      <button class="main-btn" id="getVideoInfoBtn"><i class="fas fa-bolt"></i> Get Video Info</button>
       <div class="error hidden" id="errorMsg">
         <i class="fas fa-exclamation-triangle error-icon"></i>
         <span></span>
       </div>
-      <div class="how-to-section">
+    </div>
+
+    </div>
+
+    <div class="features-row">
+      <div class="feature-card">
+        <div class="feature-icon" style="background: #7b5cff1a;"><i class="fas fa-download" style="color: #7b5cff;"></i></div>
+        <div class="feature-title">High Quality Downloads</div>
+        <div class="feature-desc">Download videos up to 4K resolution and audio up to 320kbps</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background: #7b5cff1a;"><i class="fas fa-bolt" style="color: #7b5cff;"></i></div>
+        <div class="feature-title">Fast & Reliable</div>
+        <div class="feature-desc">Lightning-fast processing with 99.9% uptime guarantee</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background: #7b5cff1a;"><i class="fas fa-film" style="color: #7b5cff;"></i></div>
+        <div class="feature-title">Multiple Formats</div>
+        <div class="feature-desc">Support for MP4, MP3, WebM, and more formats</div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="header-row" style="display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 20px;">
+        <img src="logo2.png" alt="Logo" style="max-width: 60px; height: auto;" />
+        <h1 style="margin: 0;">YouTube Downloader</h1>
+      </div>
+      
+      <div id="urlInputSection" class="input-group">
+        
         <h3 class="how-to-title"><i class="fas fa-info-circle"></i> How to Use the YouTube Downloader</h3>
         <ol class="how-to-list">
           <li>Copy the URL of the YouTube video you want to download.</li>
@@ -30,101 +70,116 @@
           <li>Choose your preferred video or audio format and quality.</li>
           <li>Click the download link to save the file to your device.</li>
         </ol>
+        
+        
       </div>
-    </div>
-
-    <div id="previewSection" class="hidden fade-in">
-      <div class="main-content">
-        <!-- Left Side - Video Preview -->
-        <div class="preview-section">
-          <div class="video-title" id="videoTitle">
-            <i class="fas fa-video title-icon"></i>
-            <span></span>
+  
+      <div id="previewSection" class="hidden fade-in">
+        <div class="main-content">
+          <!-- Left Side - Video Preview -->
+          <div class="preview-section">
+            <div class="video-title" id="videoTitle">
+              <span id="videoTitleIcon"><span class="loading"></span></span>
+              <span></span>
+            </div>
+            <div class="preview-container" id="preview"></div>
+            
+            <div class="button-group">
+              <button type="button" id="changeUrlBtn" class="btn btn-secondary">
+                <i class="fas fa-undo-alt"></i>
+                Change URL
+              </button>
+              <button type="button" id="showFormatsBtn" class="btn btn-info">
+                <i class="fas fa-list-alt"></i>
+                Show Available Formats
+              </button>
+            </div>
+  
+            <div id="formatsInfo" class="hidden">
+              <div id="formatsTable"></div>
+            </div>
           </div>
-          <div class="preview-container" id="preview"></div>
-          
-          <div class="button-group">
-            <button type="button" id="changeUrlBtn" class="btn btn-secondary">
-              <i class="fas fa-undo-alt"></i>
-              Change URL
-            </button>
-            <button type="button" id="showFormatsBtn" class="btn btn-info">
-              <i class="fas fa-list-alt"></i>
-              Show Available Formats
-            </button>
-          </div>
-
-          <div id="formatsInfo" class="hidden">
-            <div id="formatsTable"></div>
-          </div>
-        </div>
-
-        <!-- Right Side - Download Options -->
-        <div class="options-section">
-          <form id="downloadForm" class="download-form">
-            <div class="form-group">
-              <label>
-                <i class="fas fa-download"></i>
-                Download Type:
-              </label>
-              <div class="radio-group">
-                <label class="radio-item">
-                  <input type="radio" name="downloadType" value="video" checked>
-                  <i class="fas fa-video radio-icon video-icon"></i>
-                  <span>Video (MP4)</span>
+  
+          <!-- Right Side - Download Options -->
+          <div class="options-section" id="downloadOptions">
+            <form id="downloadForm" class="download-form">
+              <div class="form-group">
+                <label>
+                  <i class="fas fa-download"></i>
+                  Download Type:
                 </label>
-                <label class="radio-item">
-                  <input type="radio" name="downloadType" value="audio">
-                  <i class="fas fa-music radio-icon audio-icon"></i>
-                  <span>Audio Only (MP3)</span>
-                </label>
+                <div class="radio-group">
+                  <label class="radio-item">
+                    <input type="radio" name="downloadType" value="video" checked>
+                    <i class="fas fa-video radio-icon video-icon"></i>
+                    <span>Video (MP4)</span>
+                  </label>
+                  <label class="radio-item">
+                    <input type="radio" name="downloadType" value="audio">
+                    <i class="fas fa-music radio-icon audio-icon"></i>
+                    <span>Audio Only (MP3)</span>
+                  </label>
+                </div>
               </div>
-            </div>
-
-            <div class="form-group">
-              <label for="resolution">
-                <i class="fas fa-cog"></i>
-                Quality:
-              </label>
-              <select id="resolution" name="resolution">
-                <option value="best">
-                  <i class="fas fa-star quality-icon"></i>
-                  Best Quality
-                </option>
-                <option value="1080">
-                  <i class="fas fa-tv quality-icon"></i>
-                  1080p HD
-                </option>
-                <option value="720">
-                  <i class="fas fa-tv quality-icon"></i>
-                  720p HD
-                </option>
-                <option value="480">
-                  <i class="fas fa-tv quality-icon"></i>
-                  480p
-                </option>
-                <option value="360">
-                  <i class="fas fa-tv quality-icon"></i>
-                  360p
-                </option>
-              </select>
-            </div>
-
-            <button type="submit" class="btn btn-primary" style="width: 100%;">
-              <i class="fas fa-download download-icon"></i>
-              Download Now
-            </button>
-          </form>
+  
+              <div class="form-group">
+                <label for="resolution">
+                  <i class="fas fa-cog"></i>
+                  Quality:
+                </label>
+                <select id="resolution" name="resolution">
+                  <option value="best">
+                    <i class="fas fa-star quality-icon"></i>
+                    Best Quality
+                  </option>
+                  <option value="1080">
+                    <i class="fas fa-tv quality-icon"></i>
+                    1080p HD
+                  </option>
+                  <option value="720">
+                    <i class="fas fa-tv quality-icon"></i>
+                    720p HD
+                  </option>
+                  <option value="480">
+                    <i class="fas fa-tv quality-icon"></i>
+                    480p
+                  </option>
+                  <option value="360">
+                    <i class="fas fa-tv quality-icon"></i>
+                    360p
+                  </option>
+                </select>
+              </div>
+  
+              <button type="submit" class="btn btn-primary" style="width: 100%;">
+                <i class="fas fa-download download-icon"></i>
+                Download Now
+              </button>
+              <div id="successMsg" class="success hidden" style="text-align:center; margin-top:10px; color:#28a745; font-weight:600;">
+                <i class="fas fa-check-circle success-icon"></i> Your download is starting. 
+              </div>
+              <div id="progressBarContainer" style="display:none; margin-top: 16px; width: 100%;">
+                <div id="progressBar" style="height: 16px; width: 0; background: linear-gradient(90deg, #7b5cff 0%, #4e3ca6 100%); border-radius: 8px; transition: width 0.3s;"></div>
+                <div id="progressText" style="margin-top: 6px; color: #7b5cff; font-weight: 600; text-align: center; display: none;">Download Process Complete. Please wait a few seconds!</div>
+              </div>
+              
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </main>
+  
 
   <footer class="footer">
     <div class="footer-content">
-      <span>&copy; 2025 YouTube to MP4 Downloader</span>
-      <span class="footer-links">
-       </span>
+      <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 8px;">
+        <img src="logo2.png" alt="YouTube Downloader Logo" class="header-logo" />
+        <span style="font-weight: 700; font-size: 1.2rem; color: #0c0b0b;">YouTube Downloader</span>
+      </div>
+      <div style="color: #e0e0e0; font-size: 1rem; margin-bottom: 8px;">Fast, secure, and reliable YouTube video downloading service</div>
+      <div style="color: #b0b0b0; font-size: 0.95rem; margin-bottom: 2px;">© 2025 YouTube Downloader.</div>
+     
     </div>
   </footer>
 
@@ -142,6 +197,9 @@
     const showFormatsBtn = document.getElementById('showFormatsBtn');
     const formatsInfo = document.getElementById('formatsInfo');
     const formatsTable = document.getElementById('formatsTable');
+    const videoTitleIcon = document.getElementById('videoTitleIcon');
+    const getVideoInfoBtn = document.getElementById('getVideoInfoBtn');
+    const downloadOptions = document.getElementById('downloadOptions');
 
     function showError(message) {
       errorText.textContent = message;
@@ -152,18 +210,27 @@
       errorMsg.classList.add('hidden');
     }
 
+    // YouTube URL validation function
+    function isValidYouTubeUrl(url) {
+      // Accepts both youtu.be and youtube.com/watch?v= links
+      return /^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)[\w-]{11}/.test(url);
+    }
+
     async function fetchTitle(url) {
       titleText.textContent = '';
       preview.innerHTML = '';
       formatsInfo.classList.add('hidden');
       if (!url) return;
-      
+      // Show loading spinner
+      videoTitleIcon.innerHTML = '<span class="loading"></span>';
       try {
         const resp = await fetch(`/title?url=${encodeURIComponent(url)}`);
         if (!resp.ok) return;
         const data = await resp.json();
         if (data.title) {
           titleText.textContent = data.title;
+          // Remove the icon after loading
+          videoTitleIcon.innerHTML = '';
           const match = url.match(/(?:v=|youtu\.be\/)([\w-]{11})/);
           if (match) {
             preview.innerHTML = `<iframe width="100%" height="253" src="https://www.youtube.com/embed/${match[1]}" frameborder="0" allowfullscreen></iframe>`;
@@ -172,6 +239,7 @@
       } catch (e) {
         titleText.textContent = '';
         preview.innerHTML = '';
+        videoTitleIcon.innerHTML = '';
       }
     }
 
@@ -193,59 +261,40 @@
       }
     }
 
-    function displayFormats(formatsText) {
-      const lines = formatsText.split('\n');
-      const formats = [];
-      
-      lines.forEach(line => {
-        const trimmedLine = line.trim();
-        if (trimmedLine && !trimmedLine.startsWith('ID') && !trimmedLine.includes('--')) {
-          const match = trimmedLine.match(/^(\d+)\s+(\S+)\s+(\S+)\s+(.+)$/);
-          if (match) {
-            formats.push({
-              id: match[1],
-              extension: match[2],
-              resolution: match[3],
-              note: match[4]
-            });
-          }
-        }
-      });
-      
-      const commonResolutions = ['360p', '480p', '720p', '1080p'];
-      const availableResolutions = [];
-      
-      commonResolutions.forEach(res => {
-        const matchingFormats = formats.filter(f => f.resolution.includes(res));
-        availableResolutions.push({
-          resolution: res,
-          available: matchingFormats.length > 0,
-          formats: matchingFormats
-        });
-      });
-      
-      if (availableResolutions.some(r => r.available)) {
+    function displayFormats(formatsArr) {
+      if (!Array.isArray(formatsArr) || formatsArr.length === 0) {
+        formatsTable.innerHTML = '<p style="color: #666; text-align: center;"><i class="fas fa-info-circle"></i> No formats found for this video</p>';
+        return;
+      }
+      // Only keep formats that are downloadable (have a url, ext=mp4, and a matching height)
+      const commonResolutions = ['360', '480', '720', '1080'];
+      const availableResolutions = commonResolutions.map(res => {
+        const matching = formatsArr.filter(f => f.url && f.ext === 'mp4' && f.height && f.height.toString() === res);
+        return {
+          resolution: res + 'p',
+          available: matching.length > 0,
+          format: matching.length > 0 ? matching[0] : null
+        };
+      }).filter(r => r.available);
+      if (availableResolutions.length > 0) {
         formatsTable.innerHTML = `
           <h4 style="color: #333; margin-bottom: 15px; text-align: center;">
-            <i class="fas fa-check-circle success-icon"></i>
-            Available Resolutions:
+            <i class="fas fa-check-circle"></i>
+            Available Formats:
           </h4>
           <div class="formats-grid">
             ${availableResolutions.map(res => `
-              <div class="format-card ${res.available ? 'available' : 'unavailable'}">
+              <div class="format-card available">
                 <div class="resolution">
                   <i class="fas fa-tv"></i>
                   ${res.resolution}
-                </div>
-                <div class="status">
-                  ${res.available ? '<i class="fas fa-check success-icon"></i> Available' : '<i class="fas fa-times error-icon"></i> Not Available'}
                 </div>
               </div>
             `).join('')}
           </div>
         `;
       } else {
-        formatsTable.innerHTML = '<p style="color: #666; text-align: center;"><i class="fas fa-info-circle"></i> No common resolutions found for this video</p>';
+        formatsTable.innerHTML = '<p style="color: #666; text-align: center;"><i class="fas fa-info-circle"></i> No downloadable formats found for this video</p>';
       }
     }
 
@@ -259,6 +308,12 @@
         showError('Please enter a YouTube URL.');
         return;
       }
+      if (!isValidYouTubeUrl(url)) {
+        showError('Please enter a valid YouTube video URL.');
+        return;
+      }
+      // Show success message
+      document.getElementById('successMsg').classList.remove('hidden');
       window.location.href = `/download?url=${encodeURIComponent(url)}&type=${type}&res=${res}`;
     });
 
@@ -279,28 +334,115 @@
     urlInput.addEventListener('paste', function() {
       setTimeout(() => {
         const url = urlInput.value.trim();
-        if (url && url.includes('youtube.com')) {
-          previewSection.classList.remove('hidden');
-          urlInputSection.classList.add('hidden');
-          fetchTitle(url);
+        if (!url) {
+          previewSection.classList.add('hidden');
+          urlInputSection.classList.remove('hidden');
+          hideError();
+          return;
         }
+        if (!isValidYouTubeUrl(url)) {
+          previewSection.classList.add('hidden');
+          urlInputSection.classList.remove('hidden');
+          showError('Please enter a valid YouTube video URL.');
+          return;
+        }
+        hideError();
+        previewSection.classList.remove('hidden');
+        urlInputSection.classList.add('hidden');
+        fetchTitle(url);
       }, 50);
     });
 
     urlInput.addEventListener('input', function() {
       const url = urlInput.value.trim();
-      if (url) {
-        setTimeout(() => {
-          const currentUrl = urlInput.value.trim();
-          if (currentUrl) {
-            previewSection.classList.remove('hidden');
-            urlInputSection.classList.add('hidden');
-            fetchTitle(currentUrl);
-          }
-        }, 100);
-      } else {
+      if (!url) {
         previewSection.classList.add('hidden');
         urlInputSection.classList.remove('hidden');
+        hideError();
+        return;
+      }
+      if (!isValidYouTubeUrl(url)) {
+        previewSection.classList.add('hidden');
+        urlInputSection.classList.remove('hidden');
+        showError('Please enter a valid YouTube video URL.');
+        return;
+      }
+      hideError();
+      setTimeout(() => {
+        const currentUrl = urlInput.value.trim();
+        if (currentUrl && isValidYouTubeUrl(currentUrl)) {
+          previewSection.classList.remove('hidden');
+          urlInputSection.classList.add('hidden');
+          fetchTitle(currentUrl);
+        }
+      }, 100);
+    });
+
+    // Hide success message when input changes
+    urlInput.addEventListener('input', function() {
+      document.getElementById('successMsg').classList.add('hidden');
+    });
+
+    // Add scroll-into-view for Get Video Info button with validation
+    getVideoInfoBtn.addEventListener('click', function() {
+      const url = urlInput.value.trim();
+      if (!url) {
+        showError('Please enter a YouTube URL.');
+        return;
+      }
+      if (!isValidYouTubeUrl(url)) {
+        showError('Please enter a valid YouTube video URL.');
+        return;
+      }
+      hideError();
+      previewSection.classList.remove('hidden');
+      urlInputSection.classList.add('hidden');
+      fetchTitle(url);
+      setTimeout(() => {
+        downloadOptions.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
+    });
+
+    // Download progress bar demo
+    const downloadForm = document.getElementById('downloadForm');
+    const progressBarContainer = document.getElementById('progressBarContainer');
+    const progressBar = document.getElementById('progressBar');
+    const progressText = document.getElementById('progressText');
+    if (downloadForm) {
+      downloadForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        progressBarContainer.style.display = 'block';
+        progressBar.style.width = '0';
+        progressText.style.display = 'none';
+        let progress = 0;
+        const interval = setInterval(() => {
+          progress += Math.random() * 18 + 7;
+          if (progress >= 100) {
+            progress = 100;
+            clearInterval(interval);
+            progressText.style.display = 'block';
+          }
+          progressBar.style.width = progress + '%';
+        }, 300);
+      });
+    }
+
+    // Dark mode toggle logic
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const body = document.body;
+    // Load preference
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      body.classList.add('dark-mode');
+      darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+    darkModeToggle.addEventListener('click', function() {
+      body.classList.toggle('dark-mode');
+      if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('darkMode', 'enabled');
+        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      } else {
+        localStorage.setItem('darkMode', 'disabled');
+        darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
       }
     });
   </script>
